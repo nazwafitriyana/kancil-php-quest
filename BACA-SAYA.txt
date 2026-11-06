@@ -1,0 +1,53 @@
+KANCIL PHP QUEST — dibuat oleh Nazwa Fitriyana
+==============================================
+
+Cara pakai:
+- Buka index.html di browser (klik dua kali), atau upload ke hosting
+  statis (Netlify Drop, GitHub Pages, Vercel, InfinityFree).
+- Untuk hosting cukup upload index.html saja. Semua sudah ada di dalamnya,
+  dan tampilannya sudah menyesuaikan layar HP.
+
+Isi folder "sumber" (hanya perlu kalau mau mengubah game-nya):
+- app.html    : tampilan, gaya, suara, Kuis Kilat, kostum, sertifikat, kartu story, dan logika game
+- php.js      : mesin PHP mini yang menjalankan kode di browser
+- lessons.js  : daftar wilayah, pelajaran, dan soal latihan
+- steps.js    : materi Kancil, contoh kode, dan kuis tiap pelajaran
+- check.js    : cara pengecekan jawaban latihan
+- build.py    : menggabungkan semua file sumber jadi ../index.html
+                (jalankan dari dalam folder sumber: python3 build.py)
+- verify.js   : mengecek semua jawaban contoh benar
+                (jalankan: node verify.js, butuh Node.js)
+
+Catatan: progres (XP, bintang, streak, kostum, nama di sertifikat) tersimpan di browser masing-masing.
+
+Fitur berbagi:
+- Menu Sertifikat > Pamer ke Story membuat gambar ukuran Story (1080x1920).
+- Di versi yang di-hosting, tombol "Bagikan" di HP langsung membuka
+  pilihan Instagram / WhatsApp.
+- Link tantangan: tambahkan #tantang-ANGKA-NAMA di akhir link game, contoh
+  https://kancil-php.netlify.app/#tantang-14-nazwa . Teman yang membukanya
+  disambut pesan "Nazwa menantangmu!" dan ditantang mengalahkan skor itu.
+- Pengunjung baru otomatis melihat halaman sambutan (bisa dicoba langsung
+  ketik nama lalu jalankan kode). Buka lagi kapan saja lewat menu Beranda
+  atau dengan menambahkan #sambut di akhir link.
+- Duel online ada di menu Kuis Kilat > Duel online. Satu orang membuat
+  ruangan (dapat kode 4 huruf), temannya memilih Gabung dan memasukkan
+  kode itu di HP-nya sendiri. Butuh internet. Sambungannya memakai layanan
+  gratis PeerJS (peer-to-peer), jadi game harus dibuka lewat link hosting.
+  Kalau jaringan tidak bisa tersambung, pakai "Main tanpa koneksi":
+  main dengan kode yang sama, soalnya sama, lalu bandingkan skor.
+
+ULASAN & KOTAK SARAN (pakai Supabase, gratis)
+1. Buka supabase.com, buat project baru (atau pakai project yang sudah ada).
+2. SQL Editor > New query > tempel isi SUPABASE-ULASAN.sql > Run.
+3. Project Settings > API: salin "Project URL" dan kunci "anon public".
+4. Buka sumber/app.html, cari baris:
+     const REVIEW = { url: '', key: '' };
+   isi jadi misalnya:
+     const REVIEW = { url: 'https://xxxx.supabase.co', key: 'eyJhbGci...' };
+5. Di folder sumber jalankan: python3 build.py  (menghasilkan ../index.html baru)
+6. Upload ulang index.html ke Netlify.
+Kunci anon aman dipasang di web karena tabel dilindungi aturan RLS.
+JANGAN pernah memasang kunci "service_role".
+Membaca saran: Table Editor > saran. Menyembunyikan ulasan: ubah "tampil" jadi false.
+Sebelum disambungkan, fitur berjalan dalam "mode contoh" (tersimpan di perangkat saja).
